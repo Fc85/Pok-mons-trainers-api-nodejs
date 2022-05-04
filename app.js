@@ -18,6 +18,7 @@ mongoose.connect("mongodb://localhost:27017/pokecrud", {
 // Routes ------------------------------------------------------------------------------------------------------------------/
 app.use("/api/trainers", require("./routes/trainers.routes"));
 app.use("/api/pokemons", require("./routes/pokemons.routes"));
+
 app.get("*", function (req, res) {
   res.send("Nothing here...");
 });

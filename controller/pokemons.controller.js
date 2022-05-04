@@ -1,5 +1,6 @@
 const Pokemons = require("../schemas/pokemons.schema");
 
+// ASYNC
 const getAllPokemons = async (req, res) => {
   try {
     const pokemons = await Pokemons.find().populate("trainer");
@@ -8,6 +9,15 @@ const getAllPokemons = async (req, res) => {
     return res.status(500).send({ message: err });
   }
 };
+
+// PROMESSE
+// const getAllPokemons = (req, res) => {
+//     Pokemons.find().populate("trainer").then(pokemons => {
+//       return res.status(200).send(pokemons);
+//     }).catch(err => {
+//       return res.status(500).send({ message: err });
+//     }).finally(() => {})
+// };
 
 const getPokemonById = async (req, res) => {
   try {

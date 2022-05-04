@@ -2,7 +2,10 @@ const Trainer = require("../schemas/trainers.schema");
 
 const getAllTrainers = async (req, res) => {
   try {
-    const trainers = await Trainer.find();
+    const trainers = await Trainer.find({
+      ...(req.query.name && { name: req.query.name }),
+      ...(req.query.gender && { gender: req.query.gender }),
+    });
     return res.status(200).send(trainers);
   } catch (err) {
     return res.status(500).send({ message: err });
@@ -13,24 +16,6 @@ const getTrainerById = async (req, res) => {
   try {
     const trainers = await Trainer.findById(req.params.id);
     return res.status(200).send(trainers);
-  } catch (err) {
-    return res.status(500).send({ message: err });
-  }
-};
-
-const getTrainerByName = async (req, res) => {
-  try {
-    const trainer = await Trainer.where({ name: req.params.name }).find();
-    return res.status(200).send(trainer);
-  } catch (err) {
-    return res.status(500).send({ message: err });
-  }
-};
-
-const getTrainerByGender = async (req, res) => {
-  try {
-    const trainer = await Trainer.where({ gender: req.params.gender }).find();
-    return res.status(200).send(trainer);
   } catch (err) {
     return res.status(500).send({ message: err });
   }
@@ -70,8 +55,6 @@ const deleteTrainer = async (req, res) => {
 module.exports = {
   getAllTrainers,
   getTrainerById,
-  getTrainerByName,
-  getTrainerByGender,
   addTrainer,
   updateTrainer,
   deleteTrainer,

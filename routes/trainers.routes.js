@@ -3,8 +3,6 @@ const Trainer = require("../schemas/trainers.schema");
 const {
   getAllTrainers,
   getTrainerById,
-  getTrainerByName,
-  getTrainerByGender,
   addTrainer,
   updateTrainer,
   deleteTrainer,
@@ -13,10 +11,6 @@ const {
 router.get("/", getAllTrainers);
 
 router.get("/:id", getTrainerById);
-
-router.get("/name/:name", getTrainerByName);
-
-router.get("/gender/:gender", getTrainerByGender);
 
 router.post("/", addTrainer);
 
