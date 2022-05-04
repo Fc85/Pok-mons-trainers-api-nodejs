@@ -18,6 +18,39 @@ const getPokemonById = async (req, res) => {
   }
 };
 
+const getPokemonByTrainerId = async (req, res) => {
+  try {
+    const pokemon = await Pokemons.where({ trainer: req.params.id })
+      .find()
+      .populate("trainer");
+    return res.status(200).send(pokemon);
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
+};
+
+const getPokemonByGender = async (req, res) => {
+  try {
+    const pokemon = await Pokemons.where({ gender: req.params.gender })
+      .find()
+      .populate("trainer");
+    return res.status(200).send(pokemon);
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
+};
+
+const getPokemonByName = async (req, res) => {
+  try {
+    const pokemon = await Pokemons.where({ name: req.params.name })
+      .find()
+      .populate("trainer");
+    return res.status(200).send(pokemon);
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
+};
+
 const addPokemon = async (req, res) => {
   try {
     await Pokemons.create({
@@ -59,4 +92,7 @@ module.exports = {
   addPokemon,
   updatePokemon,
   deletePokemon,
+  getPokemonByTrainerId,
+  getPokemonByGender,
+  getPokemonByName,
 };
